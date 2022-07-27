@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Minesweeper</title>
+    <script src="dist/utils.js"></script>
+    <script src="dist/input.js"></script>
+    <script src="dist/game.js"></script>
+    <script src="dist/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="field"></canvas>
+    <div id="dom-ui">
+        <div id="splash" hidden>
+            <div>
+                <div></div>
+                <div>Height</div>
+                <div>Width</div>
+                <div>Mines</div>
+                <div>
+                    <label>
+                        <input name="level" type="radio" checked value="{&quot;height&quot;:9,&quot;width&quot;:9,&quot;mines&quot;:10}" />Beginner
+                    </label>
+                </div>
+                <div>
+                    9
+                </div>
+                <div>
+                    9
+                </div>
+                <div>
+                    10
+                </div>
+                <div>
+                    <label><input name="level" type="radio" value="{&quot;height&quot;:16,&quot;width&quot;:16,&quot;mines&quot;:40}" />Intermediate</label>
+                </div>
+                <div>16</div>
+                <div>16</div>
+                <div>40</div>
+                <div>
+                    <label><input name="level" type="radio" value="{&quot;height&quot;:16,&quot;width&quot;:30,&quot;mines&quot;:99}" />Expert</label>
+                </div>
+                <div>16</div>
+                <div>30</div>
+                <div>99</div>
+                <div>
+                    <label><input name="level" type="radio" value="custom" />Custom</label>
+                </div>
+                <div>
+                    <input type="number" name="height" value="20" />
+                </div>
+                <div>
+                    <input type="number" name="width" value="30" />
+                </div>
+                <div>
+                    <input type="number" name="mines" value="99" />
+                </div>
+                <div class="footer">
+                    <button id="startButton">Start</button>
+                </div>
+            </div>
+        </div>
+        <div id="panel" hidden>
+            <div>
+                <div id="flags">
+                    <img src="assets/images/flag.png" />
+                    <span id="counter">0</span>
+                </div>
+                <div id="avatar" click="restart()" class="face look-straight"></div>
+                <div id="time">000</div>
+            </div>
+        </div>
+        <div id="loader" hidden>
+            <div>
+                <div id="rotator"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    main();
+</script>
+</html>
