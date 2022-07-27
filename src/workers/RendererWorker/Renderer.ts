@@ -120,6 +120,7 @@ class Renderer {
         this.isLoose = false;
         this.isWin = false;
         this.numbersArray.fill(0);
+        this.fieldViewCacheArray.fill(0);
         this.canvasDirty = {
             needUpdate: true,
             lastX: 0,
@@ -254,7 +255,7 @@ class Renderer {
         );
 
         if (this.colFrom !== col || this.colTo !== colTo || this.rowFrom !== row || this.rowTo !== rowTo ||
-            this.hasUncommtedCommitedChanges()) {
+            this.hasUncommtedCommitedChanges() || this.canvasDirty.needUpdate) {
             this.colFrom = col;
             this.colTo = colTo;
             this.rowFrom = row;

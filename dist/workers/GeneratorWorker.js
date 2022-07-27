@@ -33,7 +33,7 @@ const initGenerator = ({ width: cols, height: rows, mines }, field) => {
         let randomIndex = 0;
         let minesLeft = mines;
         let cellsLeft = cols * rows;
-        let freeIndex = 0;
+        let freeIndex = cellsLeft - 1;
         crypto.getRandomValues(randoms);
         for (let y = 0; y < rows; y++) {
             for (let x = 0; x < cols; x++) {

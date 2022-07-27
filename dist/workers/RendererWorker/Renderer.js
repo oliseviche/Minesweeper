@@ -87,6 +87,7 @@ class Renderer {
         this.isLoose = false;
         this.isWin = false;
         this.numbersArray.fill(0);
+        this.fieldViewCacheArray.fill(0);
         this.canvasDirty = {
             needUpdate: true,
             lastX: 0,
@@ -195,7 +196,7 @@ class Renderer {
         let row = Math.abs(Math.min(0, ~~startRow));
         let rowTo = Math.min(row + (Math.floor(((this.secondaryCanvas.height / this.canvasScale) - Math.max(0, this.origin.y)) / CELL_HEIGHT) + COMPLEMENTARY_CELLS), this.rows);
         if (this.colFrom !== col || this.colTo !== colTo || this.rowFrom !== row || this.rowTo !== rowTo ||
-            this.hasUncommtedCommitedChanges()) {
+            this.hasUncommtedCommitedChanges() || this.canvasDirty.needUpdate) {
             this.colFrom = col;
             this.colTo = colTo;
             this.rowFrom = row;

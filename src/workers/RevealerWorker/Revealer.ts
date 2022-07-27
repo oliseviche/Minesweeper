@@ -44,7 +44,10 @@ class Revealer {
         this.setDefaults();
     }
 
-    start() {
+    start(e?: RevealerInitializeMessageData) {
+        if (e) {
+            this.freeIndex = e.freeIndex;
+        }
         this.halt = false;
     }
 
@@ -190,8 +193,8 @@ class Revealer {
             const nextIndex = indexesQueue.shift();
             if (nextIndex != undefined) {
                 if (++revealed > 1000000) {
-                    this.rafId = requestAnimationFrame(() => (this.iterativeReveal(nextIndex, indexesQueue)));
-                    return;
+                   this.rafId = requestAnimationFrame(() => (this.iterativeReveal(nextIndex, indexesQueue)));
+                   return;
                 }
                 this.reveal(field, nextIndex, indexesQueue)
             }
@@ -207,7 +210,7 @@ class Revealer {
         }
     }
 
-    reveal(field: Uint8Array, cellIndex: number, indexesQueue: LinkedArray/* indexesQueue: number[]*/) {
+    reveal(field: Uint8Array, cellIndex: number, indexesQueue: LinkedArray) {
         this.commitChange();
 
         const byteIndex = cellIndex >> 1;
@@ -218,7 +221,7 @@ class Revealer {
         }
 
         if (!isOn(field, FLAGS.OPEN, byteIndex, bitOffset)) {
-            on(field, FLAGS.OPEN, byteIndex, bitOffset)
+            on(field, FLAGS.OPEN, byteIndex, bitOffset);
             this.revealedCount++;
             if (isOn(field, FLAGS.MINE, byteIndex, bitOffset)) {
                 this.halt = true

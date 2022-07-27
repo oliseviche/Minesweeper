@@ -35,7 +35,10 @@
             cancelAnimationFrame(this.rafId);
             this.setDefaults();
         }
-        start() {
+        start(e) {
+            if (e) {
+                this.freeIndex = e.freeIndex;
+            }
             this.halt = false;
         }
         setDefaults() {
@@ -164,7 +167,7 @@
                 this.dispatcher.postMessage({ type: 'loose' });
             }
         }
-        reveal(field, cellIndex, indexesQueue /* indexesQueue: number[]*/) {
+        reveal(field, cellIndex, indexesQueue) {
             this.commitChange();
             const byteIndex = cellIndex >> 1;
             const bitOffset = (cellIndex << 2) & 7;

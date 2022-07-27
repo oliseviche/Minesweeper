@@ -57,6 +57,9 @@ function isHighlightEvent(evt) {
 function isRevealAdjuscentEvent(evt) {
     return evt.detail.type === 'reveal';
 }
+function isRepeatEvent(evt) {
+    return evt.detail.type === 'repeat';
+}
 function getContext(canvas) {
     const context = canvas.getContext('2d');
     context.imageSmoothingEnabled = false;

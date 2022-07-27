@@ -32,7 +32,7 @@ declare interface IPoint {
 }
 
 declare interface IInputSystemEventData {
-    type: 'pan' | 'mark' | 'open' | 'highlight' | 'reveal';
+    type: 'pan' | 'mark' | 'open' | 'highlight' | 'reveal' | 'repeat';
 }
 declare interface IPanInputSystemventData extends IInputSystemEventData {
     offsetX: number;
@@ -54,6 +54,10 @@ declare interface IOnAdjascentCellsHighlightInputSystemventData extends IInputSy
 declare interface IOnRevealAdjascentCellsInputSystemventData extends IInputSystemEventData {
     x: number;
     y: number;
+}
+
+declare interface IOnRepeatGameInputSystemventData extends IInputSystemEventData {
+    freeIndex: number;
 }
 
 declare class LinkedArray {

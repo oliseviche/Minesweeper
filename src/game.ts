@@ -156,10 +156,13 @@ function runGame([assets, displayConfigs, fieldConfigs, isDebug]: [ImageBitmap, 
     });
 
     document.addEventListener("fieldReseted", (evt: Event) => {
-        revealerWorker.postMessage({type: 'start'});
-        rendererWorker.postMessage({type: 'start'});
-        reviveAvatar();
-        toggleUIElement("loader");
+        const event = (evt as CustomEvent<IInputSystemEventData>);
+        if (isRepeatEvent(event)) {
+            revealerWorker.postMessage({type: 'start', freeIndex: event.detail.freeIndex});
+            rendererWorker.postMessage({type: 'start'});
+            reviveAvatar();
+            toggleUIElement("loader");
+        }
     });
 
     document.addEventListener('inputEmit', (evt: Event) => {

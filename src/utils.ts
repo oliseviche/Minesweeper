@@ -81,6 +81,10 @@ function isRevealAdjuscentEvent(evt: CustomEvent<IInputSystemEventData>): evt is
     return evt.detail.type === 'reveal';
 }
 
+function isRepeatEvent(evt: CustomEvent<IInputSystemEventData>): evt is CustomEvent<IOnRepeatGameInputSystemventData> {
+    return evt.detail.type === 'repeat';
+}
+
 function getContext<T extends HTMLCanvasElement | OffscreenCanvas>(canvas: T): 
         T extends HTMLCanvasElement ? CanvasRenderingContext2D : OffscreenCanvasRenderingContext2D {
     const context = canvas.getContext('2d')!;
