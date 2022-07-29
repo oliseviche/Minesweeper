@@ -13,6 +13,8 @@ class InputSystem {
     private releaseMouseUpListener = EMPTY_RELEASE;
     private releaseMouseClickHandler = EMPTY_RELEASE;
     private releaseMouseMoveHandler = EMPTY_RELEASE;
+    private releaseWheelHandler = EMPTY_RELEASE;
+    private releaseDoubleMouseClickHandler = EMPTY_RELEASE;
     private stateHandle:(evt: MouseEvent) => void = this.voidStateHandler;
 
     constructor(private inputSource: HTMLElement) {
@@ -24,6 +26,8 @@ class InputSystem {
         this.releaseMouseUpListener = this.addListener('mouseup', this.mouseUpHandler);
         this.releaseMouseClickHandler = this.addListener('click', this.mouseClickHandler);
         this.releaseMouseMoveHandler = this.addListener('mousemove', this.mouseMoveHandler);
+        this.releaseWheelHandler = this.addListener('wheel', this.mouseWheelHandler);
+        this.releaseDoubleMouseClickHandler =  this.addListener('dblclick', this.doubleMouseClickHandler);
     }
 
     destroy(): void {
@@ -32,6 +36,8 @@ class InputSystem {
         this.releaseMouseUpListener();
         this.releaseMouseClickHandler();
         this.releaseMouseMoveHandler();
+        this.releaseWheelHandler();
+        this.releaseDoubleMouseClickHandler();
     }
 
     private dispatch(event: CustomEvent) {
@@ -216,5 +222,41 @@ class InputSystem {
         this.cursorPoint.y = evt.clientY;
 
         this.stateHandle(evt);
+    }
+
+    private mouseWheelHandler(evt: WheelEvent) {
+        evt.preventDefault();
+
+        const diffX = evt.deltaX;
+        const diffY = evt.deltaY;
+
+        const event = new CustomEvent(EVENT_NAME, {
+            bubbles: false,
+            cancelable: false,
+            detail: {
+                type: 'pan',
+                offsetX: diffX,
+                offsetY: diffY,
+            }
+        });
+
+        this.dispatch(event);
+
+        this.cursorPoint.x -= evt.deltaX;
+        this.cursorPoint.y -= evt.deltaY;
+    }
+
+    private doubleMouseClickHandler(evt: MouseEvent) {
+        const event = new CustomEvent<IOnRevealAdjascentCellsInputSystemventData>(EVENT_NAME, {
+            cancelable: false,
+            bubbles: false,
+            detail: {
+                type: "reveal",
+                x: evt.clientX,
+                y: evt.clientY,
+            },
+        });
+
+        this.dispatch(event);
     }
 }
