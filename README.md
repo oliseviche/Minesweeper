@@ -13,3 +13,6 @@ After getting the source code from repository move to teh root folder and run np
 Run:
 After succesfull installation, execute `npm start` command. This will launch the dedicated web server.
 If you are using Windows 10 OS, it may require you to provide certain permissions. Open windows terminal, and execute the following command in the root folder `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process`. On success, the server should be up and running on the port 8080. Visit http://localhost:8080 in your Chrome browser and enjoy. 
+
+Explaining video:
+https://www.loom.com/share/5482daba587f4355a09a9b0cf54c64ab
