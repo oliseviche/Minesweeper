@@ -8,7 +8,7 @@
     "start": "node server.js",
     "tsc": "node ./node_modules/typescript/bin/tsc",
     "tsc-init": "node ./node_modules/typescript/bin/tsc --init",
-    "build": "node ./node_modules/typescript/bin/tsc",
+    "build": "node ./node_modules/typescript/bin/tsc"
   },
   "author": "Eugene Olisevich Alrxandrovich",
   "license": "ISC",
